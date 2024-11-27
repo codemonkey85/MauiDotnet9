@@ -6,7 +6,7 @@
     xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
     xmlns:pages="clr-namespace:MauiDotnet9.Pages"
     Shell.FlyoutBehavior="Flyout"
-    Title="MauiDotnet9">
+    Title="My MAUI App">
 
     <ShellContent
         Title="Dashboard"
