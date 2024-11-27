@@ -5,24 +5,17 @@ using MauiDotnet9.Models;
 
 namespace MauiDotnet9.PageModels;
 
-public partial class ManageMetaPageModel : ObservableObject
+public partial class ManageMetaPageModel(CategoryRepository categoryRepository, TagRepository tagRepository, SeedDataService seedDataService) : ObservableObject
 {
-    private readonly CategoryRepository _categoryRepository;
-    private readonly TagRepository _tagRepository;
-    private readonly SeedDataService _seedDataService;
+    private readonly CategoryRepository _categoryRepository = categoryRepository;
+    private readonly TagRepository _tagRepository = tagRepository;
+    private readonly SeedDataService _seedDataService = seedDataService;
 
     [ObservableProperty]
     private ObservableCollection<Category> _categories = [];
 
     [ObservableProperty]
     private ObservableCollection<Tag> _tags = [];
-
-    public ManageMetaPageModel(CategoryRepository categoryRepository, TagRepository tagRepository, SeedDataService seedDataService)
-    {
-        _categoryRepository = categoryRepository;
-        _tagRepository = tagRepository;
-        _seedDataService = seedDataService;
-    }
 
     private async Task LoadData()
     {

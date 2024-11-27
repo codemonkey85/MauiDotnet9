@@ -5,17 +5,12 @@ using MauiDotnet9.Models;
 
 namespace MauiDotnet9.PageModels;
 
-public partial class ProjectListPageModel : ObservableObject
+public partial class ProjectListPageModel(ProjectRepository projectRepository) : ObservableObject
 {
-    private readonly ProjectRepository _projectRepository;
+    private readonly ProjectRepository _projectRepository = projectRepository;
 
     [ObservableProperty]
     private List<Project> _projects = [];
-
-    public ProjectListPageModel(ProjectRepository projectRepository)
-    {
-        _projectRepository = projectRepository;
-    }
 
     [RelayCommand]
     private async Task Appearing()
