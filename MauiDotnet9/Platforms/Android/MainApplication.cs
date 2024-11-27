@@ -1,4 +1,7 @@
-﻿namespace MauiDotnet9;
+﻿using Android.App;
+using Android.Runtime;
+
+namespace MauiDotnet9;
 
 [Application]
 public class MainApplication : MauiApplication
