@@ -1,10 +1,9 @@
-namespace MauiDotnet9.Pages.Controls
+namespace MauiDotnet9.Pages.Controls;
+
+public partial class TagView
 {
-    public partial class TagView
+    public TagView()
     {
-        public TagView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

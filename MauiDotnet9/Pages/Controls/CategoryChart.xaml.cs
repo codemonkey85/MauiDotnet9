@@ -1,10 +1,9 @@
-namespace MauiDotnet9.Pages.Controls
+namespace MauiDotnet9.Pages.Controls;
+
+public partial class CategoryChart
 {
-    public partial class CategoryChart
+    public CategoryChart()
     {
-        public CategoryChart()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

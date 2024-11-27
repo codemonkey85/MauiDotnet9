@@ -1,11 +1,10 @@
-namespace MauiDotnet9.Pages
+namespace MauiDotnet9.Pages;
+
+public partial class ManageMetaPage : ContentPage
 {
-    public partial class ManageMetaPage : ContentPage
+    public ManageMetaPage(ManageMetaPageModel model)
     {
-        public ManageMetaPage(ManageMetaPageModel model)
-        {
-            InitializeComponent();
-            BindingContext = model;
-        }
+        InitializeComponent();
+        BindingContext = model;
     }
 }

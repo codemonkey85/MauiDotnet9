@@ -1,10 +1,9 @@
-namespace MauiDotnet9.Pages.Controls
+namespace MauiDotnet9.Pages.Controls;
+
+public partial class AddButton
 {
-    public partial class AddButton
+    public AddButton()
     {
-        public AddButton()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

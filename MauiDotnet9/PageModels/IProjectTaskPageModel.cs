@@ -1,11 +1,10 @@
 using CommunityToolkit.Mvvm.Input;
 using MauiDotnet9.Models;
 
-namespace MauiDotnet9.PageModels
+namespace MauiDotnet9.PageModels;
+
+public interface IProjectTaskPageModel
 {
-    public interface IProjectTaskPageModel
-    {
-        IAsyncRelayCommand<ProjectTask> NavigateToTaskCommand { get; }
-        bool IsBusy { get; }
-    }
+    IAsyncRelayCommand<ProjectTask> NavigateToTaskCommand { get; }
+    bool IsBusy { get; }
 }

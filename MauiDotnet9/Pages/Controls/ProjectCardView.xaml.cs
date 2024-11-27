@@ -1,10 +1,9 @@
-namespace MauiDotnet9.Pages.Controls
+namespace MauiDotnet9.Pages.Controls;
+
+public partial class ProjectCardView
 {
-    public partial class ProjectCardView
+    public ProjectCardView()
     {
-        public ProjectCardView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
