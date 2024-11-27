@@ -27,10 +27,14 @@ public partial class TaskView
         var checkbox = (CheckBox)sender;
 
         if (checkbox.BindingContext is not ProjectTask task)
+        {
             return;
+        }
 
         if (task.IsCompleted == e.Value)
+        {
             return;
+        }
 
         task.IsCompleted = e.Value;
         TaskCompletedCommand?.Execute(task);

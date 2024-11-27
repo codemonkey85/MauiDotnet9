@@ -17,20 +17,20 @@ public partial class TaskDetailPageModel : ObservableObject, IQueryAttributable
     private string _title = string.Empty;
 
     [ObservableProperty]
-    private readonly bool _isCompleted;
+    private bool _isCompleted;
 
     [ObservableProperty]
     private List<Project> _projects = [];
 
     [ObservableProperty]
-    private readonly Project? _project;
+    private Project? _project;
 
     [ObservableProperty]
-    private readonly int _selectedProjectIndex = -1;
+    private int _selectedProjectIndex = -1;
 
 
     [ObservableProperty]
-    private readonly bool _isExistingProject;
+    private bool _isExistingProject;
 
     public TaskDetailPageModel(ProjectRepository projectRepository, TaskRepository taskRepository, ModalErrorHandler errorHandler)
     {
@@ -47,9 +47,11 @@ public partial class TaskDetailPageModel : ObservableObject, IQueryAttributable
     private async Task LoadTaskAsync(IDictionary<string, object> query)
     {
         if (query.TryGetValue(ProjectQueryKey, out var project))
+        {
             Project = (Project)project;
+        }
 
-        int taskId = 0;
+        var taskId = 0;
 
         if (query.ContainsKey("id"))
         {
@@ -81,9 +83,13 @@ public partial class TaskDetailPageModel : ObservableObject, IQueryAttributable
         }
 
         if (Project is not null)
+        {
             SelectedProjectIndex = Projects.FindIndex(p => p.ID == Project.ID);
+        }
         else if (_task?.ProjectID > 0)
+        {
             SelectedProjectIndex = Projects.FindIndex(p => p.ID == _task.ProjectID);
+        }
 
         if (taskId > 0)
         {
@@ -129,23 +135,31 @@ public partial class TaskDetailPageModel : ObservableObject, IQueryAttributable
 
         _task.Title = Title;
 
-        int projectId = Project?.ID ?? 0;
+        var projectId = Project?.ID ?? 0;
 
         if (Projects.Count > SelectedProjectIndex && SelectedProjectIndex >= 0)
+        {
             _task.ProjectID = projectId = Projects[SelectedProjectIndex].ID;
+        }
 
         _task.IsCompleted = IsCompleted;
 
         if (Project?.ID == projectId && !Project.Tasks.Contains(_task))
+        {
             Project.Tasks.Add(_task);
+        }
 
         if (_task.ProjectID > 0)
+        {
             _taskRepository.SaveItemAsync(_task).FireAndForgetSafeAsync(_errorHandler);
+        }
 
         await Shell.Current.GoToAsync("..?refresh=true");
 
         if (_task.ID > 0)
+        {
             await AppShell.DisplayToastAsync("Task saved");
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanDelete))]
@@ -160,10 +174,14 @@ public partial class TaskDetailPageModel : ObservableObject, IQueryAttributable
         }
 
         if (Project.Tasks.Contains(_task))
+        {
             Project.Tasks.Remove(_task);
+        }
 
         if (_task.ID > 0)
+        {
             await _taskRepository.DeleteItemAsync(_task);
+        }
 
         await Shell.Current.GoToAsync("..?refresh=true");
         await AppShell.DisplayToastAsync("Task deleted");

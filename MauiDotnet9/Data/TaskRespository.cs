@@ -27,7 +27,9 @@ public class TaskRepository
     private async Task Init()
     {
         if (_hasBeenInitialized)
+        {
             return;
+        }
 
         await using var connection = new SqliteConnection(Constants.DatabasePath);
         await connection.OpenAsync();

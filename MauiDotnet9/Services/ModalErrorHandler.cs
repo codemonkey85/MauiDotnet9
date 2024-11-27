@@ -22,7 +22,9 @@ public class ModalErrorHandler : IErrorHandler
         {
             await _semaphore.WaitAsync();
             if (Shell.Current is Shell shell)
+            {
                 await shell.DisplayAlert("Error", ex.Message, "OK");
+            }
         }
         finally
         {

@@ -27,10 +27,10 @@ public partial class MainPageModel : ObservableObject, IProjectTaskPageModel
     private List<Project> _projects = [];
 
     [ObservableProperty]
-    private readonly bool _isBusy;
+    private bool _isBusy;
 
     [ObservableProperty]
-    private readonly bool _isRefreshing;
+    private bool _isRefreshing;
 
     [ObservableProperty]
     private string _today = DateTime.Now.ToString("dddd, MMM d");
@@ -65,7 +65,7 @@ public partial class MainPageModel : ObservableObject, IProjectTaskPageModel
                 chartColors.Add(category.ColorBrush);
 
                 var ps = Projects.Where(p => p.CategoryID == category.ID).ToList();
-                int tasksCount = ps.SelectMany(p => p.Tasks).Count();
+                var tasksCount = ps.SelectMany(p => p.Tasks).Count();
 
                 chartData.Add(new(category.Title, tasksCount));
             }
@@ -84,7 +84,7 @@ public partial class MainPageModel : ObservableObject, IProjectTaskPageModel
 
     private async Task InitData(SeedDataService seedDataService)
     {
-        bool isSeeded = Preferences.Default.ContainsKey("is_seeded");
+        var isSeeded = Preferences.Default.ContainsKey("is_seeded");
 
         if (!isSeeded)
         {

@@ -26,7 +26,7 @@ public class SeedDataService
     {
         ClearTables();
 
-        await using Stream templateStream = await FileSystem.OpenAppPackageFileAsync(_seedDataFilePath);
+        await using var templateStream = await FileSystem.OpenAppPackageFileAsync(_seedDataFilePath);
 
         ProjectsJson? payload = null;
         try

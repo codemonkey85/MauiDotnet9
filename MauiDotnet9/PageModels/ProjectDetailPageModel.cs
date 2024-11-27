@@ -26,10 +26,10 @@ public partial class ProjectDetailPageModel : ObservableObject, IQueryAttributab
     private List<Category> _categories = [];
 
     [ObservableProperty]
-    private readonly Category? _category;
+    private Category? _category;
 
     [ObservableProperty]
-    private readonly int _categoryIndex = -1;
+    private int _categoryIndex = -1;
 
     [ObservableProperty]
     private List<Tag> _allTags = [];
@@ -38,7 +38,7 @@ public partial class ProjectDetailPageModel : ObservableObject, IQueryAttributab
     private string _icon = FluentUI.ribbon_24_regular;
 
     [ObservableProperty]
-    private readonly bool _isBusy;
+    private bool _isBusy;
 
     [ObservableProperty]
     private List<string> _icons =
@@ -70,7 +70,7 @@ public partial class ProjectDetailPageModel : ObservableObject, IQueryAttributab
     {
         if (query.ContainsKey("id"))
         {
-            int id = Convert.ToInt32(query["id"]);
+            var id = Convert.ToInt32(query["id"]);
             LoadData(id).FireAndForgetSafeAsync(_errorHandler);
         }
         else if (query.ContainsKey("refresh"))
@@ -98,7 +98,9 @@ public partial class ProjectDetailPageModel : ObservableObject, IQueryAttributab
         if (_project.IsNullOrNew())
         {
             if (_project is not null)
+            {
                 Tasks = new(_project.Tasks);
+            }
 
             return;
         }
