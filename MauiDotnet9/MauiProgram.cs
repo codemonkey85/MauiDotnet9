@@ -9,6 +9,7 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+        var services = builder.Services;
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
@@ -26,21 +27,21 @@ public static class MauiProgram
 
 #if DEBUG
 		builder.Logging.AddDebug();
-		builder.Services.AddLogging(configure => configure.AddDebug());
+        services.AddLogging(configure => configure.AddDebug());
 #endif
 
-        builder.Services.AddSingleton<ProjectRepository>();
-        builder.Services.AddSingleton<TaskRepository>();
-        builder.Services.AddSingleton<CategoryRepository>();
-        builder.Services.AddSingleton<TagRepository>();
-        builder.Services.AddSingleton<SeedDataService>();
-        builder.Services.AddSingleton<ModalErrorHandler>();
-        builder.Services.AddSingleton<MainPageModel>();
-        builder.Services.AddSingleton<ProjectListPageModel>();
-        builder.Services.AddSingleton<ManageMetaPageModel>();
+        services.AddSingleton<ProjectRepository>();
+        services.AddSingleton<TaskRepository>();
+        services.AddSingleton<CategoryRepository>();
+        services.AddSingleton<TagRepository>();
+        services.AddSingleton<SeedDataService>();
+        services.AddSingleton<ModalErrorHandler>();
+        services.AddSingleton<MainPageModel>();
+        services.AddSingleton<ProjectListPageModel>();
+        services.AddSingleton<ManageMetaPageModel>();
 
-        builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
-        builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
+        services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
+        services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
 
         return builder.Build();
     }
